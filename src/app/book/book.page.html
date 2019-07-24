@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>后台管理</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    当前绘本
+    <ion-row *ngFor="let book of books">
+      <ion-col>{{book.title}}</ion-col>
+      <ion-col>{{book.cover.url}}</ion-col>
+      <ion-col>
+        [<ion-text *ngFor="let page of book.pageList">
+          {{page.picture.url}}
+        </ion-text>]
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="deleteBook(book)">删除</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <br /><br /><br />
+  <ion-item-group>
+    添加绘本
+    <ion-item>
+      <ion-label>绘本名:</ion-label>
+      <ion-input [(ngModel)]="book.title" placeholder="name"></ion-input>
+      <ion-label>级别:</ion-label>
+      <ion-input [(ngModel)]="book.level" placeholder="5"></ion-input>
+      <ion-label>封面:</ion-label>
+      <ion-input type="file" (change)="onCover($event)"></ion-input>
+      <ion-button (click)="addPage()">添加图片页</ion-button>
+    </ion-item>
+    <div *ngFor="let page of book.pageList">
+      <ion-item>
+        名称:<ion-input [(ngModel)]="page.name" placeholder="name"></ion-input>
+        图片:
+        <input type="file" id="{{page.name}}-pic" (change)="onFileChange($event)">
+        声音:
+        <input type="file" id="{{page.name}}-sound" (change)="onFileChange($event)">
+      </ion-item>
+    </div>
+    <ion-button (click)="submit()">提交</ion-button>
+  </ion-item-group>
+</ion-content>
