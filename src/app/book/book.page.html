@@ -5,24 +5,32 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    当前绘本
-    <ion-row *ngFor="let book of books">
-      <ion-col>{{book.title}}</ion-col>
-      <ion-col>{{book.cover.url}}</ion-col>
-      <ion-col>
-        [<ion-text *ngFor="let page of book.pageList">
-          {{page.picture.url}}
-        </ion-text>]
-      </ion-col>
-      <ion-col>
-        <ion-button (click)="deleteBook(book)">删除</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <br /><br /><br />
-  <ion-item-group>
-    添加绘本
+  <ion-card>
+    <ion-card-header>
+      <!-- <ion-card-subtitle>当前绘本</ion-card-subtitle> -->
+      <ion-card-title>当前绘本</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row *ngFor="let book of books">
+          <ion-col>• {{book.title}}</ion-col>
+          <ion-col>{{book.cover.url}}</ion-col>
+          <ion-col>
+            <span *ngFor="let page of book.pageList">{{page.picture.url}} </span>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="deleteBook(book)" size="small" shape="round">删除</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <br /><br />
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>添加绘本</ion-card-title>
+    </ion-card-header>
     <ion-item>
       <ion-label>绘本名:</ion-label>
       <ion-input [(ngModel)]="book.title" placeholder="name"></ion-input>
@@ -42,5 +50,5 @@
       </ion-item>
     </div>
     <ion-button (click)="submit()">提交</ion-button>
-  </ion-item-group>
+  </ion-card>
 </ion-content>
